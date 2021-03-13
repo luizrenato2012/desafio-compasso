@@ -25,11 +25,6 @@ public class CidadeResource {
 		return "Ok";
 	}
 	
-//	@GetMapping
-//	public List<CidadeDTO> listaTodas() {
-//		return service.listaTodas();
-//	}
-	
 	@GetMapping
 	public List<CidadeDTO> busca(CidadeFilter filter) {
 		return service.busca(filter);

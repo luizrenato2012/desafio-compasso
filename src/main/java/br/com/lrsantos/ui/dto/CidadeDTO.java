@@ -22,8 +22,9 @@ public class CidadeDTO {
 		return new Cidade(this.id, this.nome, this.estado);
 	}
 	
-	public CidadeDTO of(Cidade cidade) {
-		BeanUtils.copyProperties(cidade, this);
-		return this;
+	public static CidadeDTO of(Cidade cidade) {
+		CidadeDTO dto = new CidadeDTO();
+		BeanUtils.copyProperties(cidade, dto);
+		return dto;
 	}
 }

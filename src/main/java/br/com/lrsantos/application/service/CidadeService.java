@@ -5,10 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import br.com.lrsantos.domain.Cidade;
 import br.com.lrsantos.infraestructure.repository.CidadeFilter;
@@ -41,11 +39,12 @@ public class CidadeService {
 
 	private Example criaExample(CidadeFilter filter) {
 		Cidade cidade = new Cidade(null, filter.getNome(), filter.getEstado()); 
-		String campoPesquisa = !StringUtils.isEmpty(filter.getNome()) ? "nome" : "estado";
-		ExampleMatcher matcher = ExampleMatcher.matchingAll()
-				.withIgnoreCase(campoPesquisa)
-				.withStringMatcher(StringMatcher.CONTAINING);
-		return Example.of(cidade, matcher);
+		String campoPesquisa = !ObjectUtils.isEmpty(filter.getNome()) ? "nome" : "estado";
+//		ExampleMatcher matcher = ExampleMatcher.matchingAll()
+//				.withIgnoreCase(campoPesquisa)
+//				.withStringMatcher(StringMatcher.CONTAINING);
+//		return Example.of(cidade, matcher);
+		return new ExampleHelper().criaExampleDePesquisaString(campoPesquisa, cidade);
 	}
 
 }
