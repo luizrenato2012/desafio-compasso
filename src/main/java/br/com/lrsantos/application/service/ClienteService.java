@@ -41,7 +41,7 @@ public class ClienteService {
 	public ClienteDTO buscaPor(Long id) {
 		Optional<Cliente> optional = repository.findById(id);
 		Cliente cliente = optional.orElseThrow(()-> new ObjetoNaoEncontradoException("Cliente id [" + id + "] não encontrado"));
-		return ClienteDTO.of(optional.get());
+		return ClienteDTO.of(cliente);
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import br.com.lrsantos.domain.Cidade;
 import br.com.lrsantos.infraestructure.repository.CidadeFilter;
@@ -21,30 +22,33 @@ public class CidadeService {
 	
 	public List<CidadeDTO> listaTodas() {
 		return repository.findAll().stream()
-			.map(cidade -> new CidadeDTO().of(cidade))
+			.map(cidade -> CidadeDTO.of(cidade))
 			.collect(Collectors.toList());
 	}
 	
 	public CidadeDTO inclui(CidadeDTO cidadeDTO) {
 		Cidade cidade = repository.save(cidadeDTO.toCidade());
-		return new CidadeDTO().of(cidade);
+		return CidadeDTO.of(cidade);
 	}
 	
-	public List<CidadeDTO> busca(CidadeFilter filter) {
-		Example example = criaExample(filter);
-		return ((List<Cidade>)repository.findAll(example)).stream()
-				.map(cidade -> new CidadeDTO().of(cidade))
+	public List<CidadeDTO> buscaPorNome(String nome) {
+		Cidade argumentoCidade = new Cidade();
+		argumentoCidade.setNome(nome);
+		return busca("nome", argumentoCidade);
+	}
+	
+	public List<CidadeDTO> buscaPorEstado(String estado) {
+		Cidade argumentoCidade = new Cidade();
+		argumentoCidade.setEstado(estado);
+		return busca("estado", argumentoCidade);
+	}
+	
+	private List<CidadeDTO> busca(String campoPesquisa, Cidade argumentoCidade) {
+		Example<Cidade> example = ExampleHelper.criaExampleDePesquisaString(campoPesquisa, argumentoCidade);
+		return repository.findAll(example).stream()
+				.map(cidade -> CidadeDTO.of(cidade))
 				.collect(Collectors.toList());
 	}
-
-	private Example criaExample(CidadeFilter filter) {
-		Cidade cidade = new Cidade(null, filter.getNome(), filter.getEstado()); 
-		String campoPesquisa = !ObjectUtils.isEmpty(filter.getNome()) ? "nome" : "estado";
-//		ExampleMatcher matcher = ExampleMatcher.matchingAll()
-//				.withIgnoreCase(campoPesquisa)
-//				.withStringMatcher(StringMatcher.CONTAINING);
-//		return Example.of(cidade, matcher);
-		return new ExampleHelper().criaExampleDePesquisaString(campoPesquisa, cidade);
-	}
+	
 
 }
