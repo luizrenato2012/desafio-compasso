@@ -1,7 +1,7 @@
 # Desafio Compasso Uol Backend
 
 ## Descrição:
-Este é o módulo back end do desafio Mobicare.
+* Este é o módulo back end do desafio Mobicare.
 Foram usados:
 * Spring Boot
 * Banco de dados H2 em memória.
