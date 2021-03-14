@@ -9,7 +9,7 @@ public class ExampleHelper {
 	public static <T> Example<T> criaExampleDePesquisaString(String campoPesquisa, T t) {
 		ExampleMatcher matcher = ExampleMatcher.matchingAll()
 				.withIgnoreCase(campoPesquisa)
-				.withStringMatcher(StringMatcher.CONTAINING);
+				.withStringMatcher(StringMatcher.STARTING);
 		return Example.of(t, matcher);
 	}
 }

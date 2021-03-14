@@ -1,12 +1,12 @@
 package br.com.lrsantos.infraestructure.repository;
 
-import lombok.Getter;
-import lombok.Setter;
+import javax.validation.constraints.NotEmpty;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 public class ClienteFilter {
 
-	private Long id;
-	private String nome;
+	@NotEmpty(message = "Nome Completo obrigatorio")
+	private String nomeCompleto;
 }

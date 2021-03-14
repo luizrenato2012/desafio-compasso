@@ -1,16 +1,16 @@
 package br.com.lrsantos.domain;
 
 public enum Sexo {
-	MASCULINO("M"), FEMININO("f"), OUTROS("O");
+	M("Masculino"), F("Feminino"), O("Outro");
 	
-	private String codigo;
+	private String descricao;
 
 	private Sexo(String codigo) {
-		this.codigo = codigo;
+		this.descricao = codigo;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getDescricao() {
+		return descricao;
 	}
 	
 }

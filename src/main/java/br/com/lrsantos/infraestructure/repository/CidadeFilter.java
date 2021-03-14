@@ -1,15 +1,10 @@
 package br.com.lrsantos.infraestructure.repository;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 public class CidadeFilter {
 
 	private String nome;
-	
 	private String estado;
 }

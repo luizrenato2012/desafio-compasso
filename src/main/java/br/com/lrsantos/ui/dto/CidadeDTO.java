@@ -1,5 +1,8 @@
 package br.com.lrsantos.ui.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.BeanUtils;
 
 import br.com.lrsantos.domain.Cidade;
@@ -15,7 +18,10 @@ import lombok.Setter;
 public class CidadeDTO {
 
 	private Long id;
+	@NotEmpty(message = "Nome é obrigatório")
 	private String nome;
+	
+	@NotEmpty(message = "Estado é obrigatório")
 	private String estado;
 	
 	public Cidade toCidade() {

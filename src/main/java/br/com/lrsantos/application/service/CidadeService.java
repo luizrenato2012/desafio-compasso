@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import br.com.lrsantos.application.exception.RequestInvalidoException;
 import br.com.lrsantos.domain.Cidade;
 import br.com.lrsantos.infraestructure.repository.CidadeFilter;
 import br.com.lrsantos.infraestructure.repository.CidadeRepository;
@@ -31,16 +31,18 @@ public class CidadeService {
 		return CidadeDTO.of(cidade);
 	}
 	
-	public List<CidadeDTO> buscaPorNome(String nome) {
-		Cidade argumentoCidade = new Cidade();
-		argumentoCidade.setNome(nome);
-		return busca("nome", argumentoCidade);
-	}
-	
-	public List<CidadeDTO> buscaPorEstado(String estado) {
-		Cidade argumentoCidade = new Cidade();
-		argumentoCidade.setEstado(estado);
-		return busca("estado", argumentoCidade);
+	public List<CidadeDTO> buscaPor(CidadeFilter filter) {
+		if (StringUtils.hasText(filter.getNome()) && StringUtils.hasText(filter.getEstado())) {
+			throw new RequestInvalidoException("Especifique apenas nome ou estado");
+		}
+		
+		String campo = StringUtils.hasText(filter.getNome()) ? "nome" : "estado";
+		Cidade argumentoCidade = new Cidade().builder()
+				.nome(filter.getNome())
+				.estado(filter.getEstado())
+				.build();
+		
+		return busca(campo, argumentoCidade);
 	}
 	
 	private List<CidadeDTO> busca(String campoPesquisa, Cidade argumentoCidade) {

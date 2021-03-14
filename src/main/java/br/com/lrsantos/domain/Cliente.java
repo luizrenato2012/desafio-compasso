@@ -5,6 +5,7 @@ import java.time.Period;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +23,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
+@Builder
 public class Cliente {
 
 	@Id
@@ -31,7 +36,7 @@ public class Cliente {
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	
 	@Column(name="data_nascimento")
@@ -41,8 +46,6 @@ public class Cliente {
 	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
 	
-//	private Integer idade;
-	
 	public Integer getIdade() {
 		if (this.dataNascimento!=null) {
 			Period period = Period.between(dataNascimento, LocalDate.now());
@@ -50,5 +53,5 @@ public class Cliente {
 		}
 		return null;
 	}
-//	cidade onde mora.
+
 }

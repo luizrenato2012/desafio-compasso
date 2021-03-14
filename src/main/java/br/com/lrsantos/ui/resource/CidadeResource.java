@@ -2,9 +2,10 @@ package br.com.lrsantos.ui.resource;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,23 +22,13 @@ public class CidadeResource {
 	@Autowired
 	private CidadeService service;
 
-	@GetMapping("/teste")
-	public String ok() {
-		return "Ok";
-	}
-	
-	@GetMapping("/nome/{nome}")
-	public List<CidadeDTO> buscaPorNome(@PathVariable String nome) {
-		return service.buscaPorNome(nome);
-	}
-	
-	@GetMapping("/estado/{estado}")
-	public List<CidadeDTO> buscaPorEstado(@PathVariable String estado) {
-		return service.buscaPorEstado(estado);
+	@GetMapping
+	public List<CidadeDTO> busca(CidadeFilter filter) {
+		return service.buscaPor(filter);
 	}
 	
 	@PostMapping
-	public CidadeDTO inclui(@RequestBody CidadeDTO dto) {
+	public CidadeDTO inclui(@RequestBody @Valid CidadeDTO dto) {
 		return service.inclui(dto);
 	}
 }
