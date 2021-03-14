@@ -1,10 +1,11 @@
-# Desafio Compasso Uol Backend
+# Desafio Compasso UOL Backend
 
 ## Descrição:
 * Este é o módulo back end do desafio Mobicare.
 Foram usados:
 * Spring Boot
-* Banco de dados H2 em memória.
+* Banco de dados H2 em memória
+* Swagger
 * Spring Tool Suite 4
 
 ## Banco de Dados:
@@ -15,6 +16,7 @@ Acessível através da url http://localhost:8080/api/v1/h2-console com os seguin
  * Passowrd: (deixar em branco)
  Ao se iniciar a aplicação as tabelas são apagadas, recriadas e preenchidas com alguns dados de exemplo.
  
-## Endpoints:
+## URL's:
  * http://localhost:8080/api/v1/cidades
  * http://localhost:8080/api/v1/clientes
+ * http://localhost:8080/api/v1/swagger-ui.html
