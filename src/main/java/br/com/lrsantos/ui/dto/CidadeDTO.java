@@ -1,7 +1,6 @@
 package br.com.lrsantos.ui.dto;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.BeanUtils;
 

@@ -1,7 +1,7 @@
 # Desafio Compasso UOL Backend
 
 ## Descrição:
-* Este é o módulo back end do desafio Mobicare.
+Este é o módulo back end do desafio Compasso UOL.
 Foram usados:
 * Java 8
 * Lombok

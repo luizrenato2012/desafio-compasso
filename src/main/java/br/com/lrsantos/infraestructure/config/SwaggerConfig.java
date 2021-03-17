@@ -20,8 +20,6 @@ public class SwaggerConfig {
 				.paths(PathSelectors.any())
 				.build()
 				.useDefaultResponseMessages(false);
-//				.globalResponseMessage(RequestMethod.GET, criaResponseMessagesGET())
-//				.globalResponseMessage(RequestMethod.POST, criaResponseMessagesPOST());
 	}
 
 }
